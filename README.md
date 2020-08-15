@@ -34,13 +34,18 @@ git config --global user.email "1908388450@qq.com"
 mkdir mallmanager53
 cd mallmanager53
 git init    初始化git本地仓库
-touch README.md     查看本地文件状态
+git status     查看本地目录文件状态
+touch README.md     创建本地源码
 git add README.md   添加所有本地文件到git本地仓库
 git commit -m "first commit"    提交git add 的添加
 git remote add origin https://gitee.com/czz_cloud/mallmanager53.git     关联本地仓库和代码托管平台的代码仓库
-git push -u origin master
+git push -u origin master   推送本地仓库的更新到远程代码托管平台。
 
 7\  git remote rm origin  git@github.com:czz0219/mallmanager53.git 删除远程关联仓库
 8\  git remote -v 查看操作的远程仓库历史地址
+
+如果没有 公钥 ：1 托管平台需要创建 SSH keys
+                2   本地仓库管理目录 生成RSA密钥    ssh-keygen -t rsa -b 4096 -C "1908388450@qq.com"
+                3 托管平台完成创建.
 
 
