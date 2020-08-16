@@ -30,3 +30,5 @@ git push -f origin master   强制推送本地仓库的更新到远程代码托�
                 3 托管平台完成创建.
 查看现有分支    git branch
 新建登录分支    git checkout -b branch_name,例如新建开发环境的登陆分支:git checkout -b dev-login
+
+git 主分支负责推送代码,其它分支需要和主分支合并。
