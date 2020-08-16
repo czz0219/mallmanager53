@@ -22,7 +22,7 @@ MyHttpServer.install =  (Vue)=>{
 
     })
   */
-    axios.defaults.baseURL='https://www.easy-mock.com/mock/5f3811f04d8bd5380860a644/api/private/v1/';
+    axios.defaults.baseURL='http://localhost:8888/api/private/v1/';
     // 4. 添加实例方法
     Vue.prototype.$axios = axios;
   }

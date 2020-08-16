@@ -31,7 +31,7 @@ export default {
         }
     },
     methods:{
-        handleLogin(){
+        handleLogin1(){
             this.$axios.post('login',this.formData).then(
                (res)=>{
                    //对象解构赋值
@@ -44,6 +44,19 @@ export default {
                    }
                } 
             )
+        },
+        async handleLogin(){//和handleLogin1一样作用。
+            const res =await this.$axios.post('login',this.formData);
+            //对象解构赋值
+            const{data,meta:{msg,status}} =res.data;
+            if(status ===200){
+                /**保存后台返回的token */
+                localStorage.setItem('token',data.token);
+                this.$message.success(msg);
+                this.$router.push({name:'home'});
+            }else{
+                this.$message.error(msg);
+            }
         }
     }
 }
