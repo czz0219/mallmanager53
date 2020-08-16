@@ -16,17 +16,29 @@
         </el-col>
     </el-row>
     <!--表-->
-    <el-table :data="tableData" style="width: 100%">
+    <el-table :data="userList" style="width: 100%">
         <el-table-column label="#"      type="index"></el-table-column>
-        <el-table-column prop="name"    label="姓名"></el-table-column>
+        <el-table-column prop="username"    label="姓名"></el-table-column>
         <el-table-column prop="email"   label="邮箱"></el-table-column>
-        <el-table-column prop="phone"   label="电话"></el-table-column>
-        <el-table-column prop="time"    label="创建时间"></el-table-column>
-        <el-table-column prop="status"  label="用户状态"></el-table-column>
+        <el-table-column prop="mobile"   label="电话"></el-table-column>
+        <el-table-column                 label="创建时间">
+            <!--prop不支持 {{time|fmtdate}},需要在其外层加template,然后通过slot-scope传入值,在进行插值表达式
+            渲染单元格 -->
+            <template slot-scope="scope">
+                {{scope.row.create_time|fmtdate}}
+            </template>
+        </el-table-column>
+        <el-table-column   label="用户状态">
+            <template slot-scope="scope">
+                <el-switch v-model="scope.row.mg_state" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+            </template>
+        </el-table-column>
+
         <el-table-column label="操作">
             <template slot-scope="scope">
-                <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                <el-button  size="mini" plain="true" type="primary" icon="el-icon-edit" circle  @click="handleEdit"></el-button>
+                <el-button  size="mini" plain="true" type="danger" icon="el-icon-delete" circle @click="handleDelete"></el-button>
+                <el-button  size="mini" plain="true" type="success" icon="el-icon-check" circle @click="handleCheck"></el-button>
             </template>
         </el-table-column>
     </el-table>
@@ -41,13 +53,8 @@ export default {
             query: '',
             pagenum:1,
             pagesize:2,
-            tableData: [{
-                name:'王洋',
-                email:'dsfd@com',
-                phone:'123234234234',
-                time:'2020-08-20',
-                status:'comm'
-            }]
+            total:-1,
+            userList: []
         }
     },
     created(){
@@ -59,9 +66,13 @@ export default {
                     this.$axios.defaults.headers.common['Authorization']=localStorage.getItem('token');
                     const res =await this.$axios.get(`users?query=${this.query}&pagenum=${this.pagenum}&pagesize=${this.pagesize}`);
                     console.log(res);
-                    const {meta,data}=res.data;
-                    if(meta.status===200){
-                        this.tableData =data.users;
+                    const {meta:{status,msg},data:{users,total}}=res.data;
+                    if(status===200){
+                        this.userList =users;
+                        this.total=total;
+                        this.$message.success(msg);
+                    }else{
+                        this.$message.warning(msg);
                     }
         }
     }
