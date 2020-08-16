@@ -14,8 +14,44 @@
         </el-row>
     </el-header>
     <el-container>
-        <el-aside class="aside" width="200px">Aside</el-aside>
-        <el-main class="main">Main</el-main>
+        <el-aside class="aside" width="200px">
+            <el-menu
+            :router="true"
+            :unique-opened="true"
+            >
+                <el-submenu index="1">
+                    <!--定义要传入的插槽,插槽名shi title,他在组件内部已经固定了插入的位置,即头部的位置
+                        不同的slot名,有不同的插入位置
+                    -->
+                    <template slot="title">
+                        <!--插入的内容,头部插入图标和文字-->
+                        <i class="el-icon-location"></i>
+                        <span>用户管理</span>
+                    </template>
+                    <el-menu-item index="users">
+                        <i class="el-icon-circle-check"></i>
+                        <span>用户列表</span>
+                    </el-menu-item>
+                </el-submenu>
+                <el-submenu index="2">
+                    <template slot="title">
+                        <i class="el-icon-location"></i>
+                        <span>权限管理</span>
+                    </template>
+                    <el-menu-item index="2-1">
+                        <i class="el-icon-icon-location"></i>
+                        <span>角色列表</span>
+                    </el-menu-item>
+                    <el-menu-item index="2-2">
+                        <i class="el-icon-icon-location"></i>
+                        <span>角色列表</span>
+                    </el-menu-item>
+                </el-submenu>
+            </el-menu>
+        </el-aside>
+        <el-main class="main">
+            <router-view></router-view>
+        </el-main>
     </el-container>
 </el-container>
 </template>
