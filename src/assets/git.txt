@@ -34,3 +34,6 @@ git push -f origin master   强制推送本地仓库的更新到远程代码托�
 git 主分支负责推送代码,其它分支需要和主分支合并。
 git branch  查看当前使用的分支
 git checkout 分支名     切换分支
+
+git checkout -b dev-rights  新建分支,并且切换到该分支
+
