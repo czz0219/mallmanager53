@@ -19,7 +19,7 @@ git add README.md   添加所有本地文件到git本地仓库
 git commit -m "first commit"    提交git add 的添加
 git remote add origin https://gitee.com/czz_cloud/mallmanager53.git     关联本地仓库和代码托管平台的代码仓库
 git push -u origin master   推送本地仓库的更新到远程代码托管平台。
-git push -f origin master   强制推送本地仓库的更新到远程代码托管平台。
+git push -f origin master   强制推送本地仓库的更新到远程代码托管平台。(以后可以直接用git push)
 
 
 7\  git remote rm origin  git@github.com:czz0219/mallmanager53.git 删除远程关联仓库
@@ -28,3 +28,12 @@ git push -f origin master   强制推送本地仓库的更新到远程代码托�
 如果没有 公钥 ：1 托管平台需要创建 SSH keys
                 2   本地仓库管理目录 生成RSA密钥    ssh-keygen -t rsa -b 4096 -C "1908388450@qq.com"
                 3 托管平台完成创建.
+查看现有分支    git branch
+新建登录分支    git checkout -b branch_name,例如新建开发环境的登陆分支:git checkout -b dev-login
+
+git 主分支负责推送代码,其它分支需要和主分支合并。
+git branch  查看当前使用的分支
+git checkout 分支名     切换分支
+
+git checkout -b dev-rights  新建分支,并且切换到该分支
+
